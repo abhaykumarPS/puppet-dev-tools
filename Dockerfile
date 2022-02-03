@@ -1,6 +1,6 @@
 # specifying the platform here allows builds to work
 # correctly on Apple Silicon machines
-FROM --platform=linux/amd64/arm64/v8 ruby:latest as base
+FROM --platform=linux/amd64 ruby:latest as base
 
 ARG VCS_REF
 ARG GH_USER=puppetlabs
