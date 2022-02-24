@@ -1,6 +1,7 @@
 # specifying the platform here allows builds to work
 # correctly on Apple Silicon machines
-FROM --platform=amd64 ruby:2.7.4-slim-buster as base
+ARG TARGETARCH=amd64
+FROM --platform=${TARGETARCH} ruby:2.7.4-slim-buster as base
 
 ARG VCS_REF
 ARG GH_USER=puppetlabs
