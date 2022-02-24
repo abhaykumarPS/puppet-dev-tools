@@ -1,6 +1,6 @@
 # specifying the platform here allows builds to work
 # correctly on Apple Silicon machines
-FROM --platform=amd64 ruby:2.7.4-slim-buster as base
+FROM --platform=linux/arm64,linux/amd64 ruby:latest as base
 
 ARG VCS_REF
 ARG GH_USER=puppetlabs
@@ -20,15 +20,15 @@ ENV LANGUAGE en_US:en
 ENV LC_ALL en_US.UTF-8
 
 RUN apt-get install -y apt-utils \
-  && apt-get update -qq \
-  && apt-get upgrade -y \
-  && apt-get install -y --no-install-recommends curl libxml2-dev libxslt1-dev g++ gcc git gnupg2 make openssh-client ruby-dev wget zlib1g-dev \
-  && wget https://apt.puppet.com/puppet-tools-release-buster.deb \
-  && dpkg -i puppet-tools-release-buster.deb \
-  && apt-get update -qq \
-  && apt-get install -y --no-install-recommends pdk \
-  && apt-get autoremove -y \
-  && rm -rf /var/lib/apt/lists/*
+   && apt-get update -qq \
+   && apt-get upgrade -y \
+   && apt-get install -y --no-install-recommends curl libxml2-dev libxslt1-dev g++ gcc git pdk gnupg2 make openssh-client ruby-dev wget zlib1g-dev \
+   && wget https://apt.puppet.com/puppet-tools-release-bionic.deb \
+   && dpkg -i puppet-tools-release-bionic.deb \ 
+   && apt-get update -qq \
+   && apt-get install -y pdk \
+   && apt-get autoremove -y \
+   && rm -rf /var/lib/apt/lists/*
 
 RUN ln -s /bin/mkdir /usr/bin/mkdir
 
