@@ -1,7 +1,6 @@
 # specifying the platform here allows builds to work
 # correctly on Apple Silicon machines
-ARG TARGETARCH=arm64
-FROM --platform=${TARGETSRCH} ruby:latest as base
+FROM --platform=arm64 ruby:latest as base
 ARG VCS_REF
 ARG GH_USER=puppetlabs
 
